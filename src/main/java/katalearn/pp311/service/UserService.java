@@ -12,26 +12,32 @@ public class UserService  {
 
     private final UserRepository userRepository;
 
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public void addUser(User user) {
         this.userRepository.save(user);
     }
 
+    @Transactional
     public void updateUser(User user) {
         this.addUser(user);
     }
 
+    @Transactional
     public void deleteUser(User user) {
         this.userRepository.delete(user);
     }
 
+    @Transactional(readOnly = true)
     public User getUser(int id) {
         return this.userRepository.findUserById(id);
     }
 
+    @Transactional(readOnly = true)
     public List<User> getUsers() {
         return this.userRepository.findAll();
     }
